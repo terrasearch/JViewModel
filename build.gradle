@@ -3,6 +3,7 @@ plugins {
     id 'idea'
     id 'application'
     id 'jacoco'
+    id 'java-library'
 }
 
 group 'com.github.terrasearch.jviewmodel'
@@ -22,6 +23,17 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.7.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.7.0'
     testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.7.7'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                'Implementation-Version': project.version)
+    }
+}
+
+java {
+    withSourcesJar()
 }
 
 test {
