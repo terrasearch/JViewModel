@@ -1,4 +1,4 @@
-package com.github.terrasearch.jviewmodel.property.examples;
+package com.github.terrasearch.jviewmodel.examples.property;
 
 import javax.swing.*;
 import java.awt.*;
