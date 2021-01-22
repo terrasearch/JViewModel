@@ -24,9 +24,5 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    - name: Check with Gradle
-      run: ./gradlew check
-    - name: Create code coverage report with Gradle and Jacoco
-      run: ./gradlew jacocoTestReport
     - name: Upload code coverage to codecov.io
       run: bash <(curl -s https://codecov.io/bash)
