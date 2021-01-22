@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.github.terrasearch.jviewmodel'
-version '1.0'
+version '1.1'
 
 compileJava {
     sourceCompatibility = 15
@@ -27,8 +27,11 @@ dependencies {
 
 tasks.named('jar') {
     manifest {
-        attributes('Implementation-Title': project.name,
-                'Implementation-Version': project.version)
+        attributes 'Implementation-Title': project.name,
+                'Implementation-Version': project.version,
+                'Built-Date': new Date(),
+                'Built-JDK': System.getProperty('java.version'),
+                'Built-Gradle': gradle.gradleVersion
     }
 }
 
