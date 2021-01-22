@@ -1,7 +1,7 @@
 # JViewModel [![codecov](https://codecov.io/gh/terrasearch/JViewModel/branch/master/graph/badge.svg?token=5Y5DPBIOES)](https://codecov.io/gh/terrasearch/JViewModel)
 is a library, inspired by C# WPFs ViewModel patterns. It reduces the boilerplate needed to implement [Model/View/ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) in Java, with Java Swing.
 
-## Property
+##  Property
 is a variable, which announces it's changes to all subscribers. It is intended to wrap around a Model, or better, a [JavaBeans](https://en.wikipedia.org/wiki/JavaBeans).
 
 ## Java Swing MVVM
@@ -15,3 +15,11 @@ Decouples View and ViewModel even further with a ViewModel Locator, which gives 
 
 ## ViewModel Logger
 Logs the changes of given ViewModel. Also has an implementation of [Log4j](https://logging.apache.org/log4j/2.x/).
+
+# Tasklist
+- [x] Property
+- [ ] Java Swing MVVM
+- [ ] RevertableProperty
+- [ ] ViewModelLocator and DependencyInjector
+- [ ] ViewModel Logger
+- [ ] ViewModel Logger Log4j implementation
