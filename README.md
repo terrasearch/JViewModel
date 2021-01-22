@@ -1,5 +1,5 @@
 # JViewModel [![codecov](https://codecov.io/gh/terrasearch/JViewModel/branch/master/graph/badge.svg?token=5Y5DPBIOES)](https://codecov.io/gh/terrasearch/JViewModel)
-is a library, inspired by C# WPFs ViewModel patterns. It reduces the boilerplate needed to implement [Model/View/ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) in Java, with Java Swing.
+is a library, inspired by C# WPFs ViewModel patterns. It reduces the boilerplate needed to implement [Model/View/ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) in Java, with Java Swing. It simplifies existing already existing elements, which helps with Swing MVVM infrastructure, at the cost of functionality (for now).
 
 ##  Property
 is a variable, which announces it's changes to all subscribers. It is intended to wrap around a Model, or better, a [JavaBeans](https://en.wikipedia.org/wiki/JavaBeans).
