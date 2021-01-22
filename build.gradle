@@ -8,10 +8,14 @@ plugins {
 group 'com.github.terrasearch.jviewmodel'
 version '1.0'
 
+compileJava {
+    sourceCompatibility = 15
+    targetCompatibility = 15
+}
+
 repositories {
     mavenCentral()
     jcenter()
-    maven { url "http://repo1.maven.org/maven2/" }
 }
 
 dependencies {
@@ -24,15 +28,11 @@ test {
     useJUnitPlatform()
 }
 
-task codeCoverageReport(type: JacocoReport) {
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
-    sourceSets sourceSets.main
-
+jacocoTestReport {
     reports {
         xml.enabled true
-        xml.destination file("${buildDir}/reports/jacoco/report.xml")
         html.enabled false
-        csv.enabled false
     }
 }
+
+check.dependsOn jacocoTestReport
