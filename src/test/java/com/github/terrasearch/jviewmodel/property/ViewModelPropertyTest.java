@@ -1,8 +1,5 @@
-package com.github.terrasearh.viewmodelproperties;
+package com.github.terrasearch.jviewmodel.property;
 
-import com.github.terrasearch.viewmodelproperties.IPropertyChangedListener;
-import com.github.terrasearch.viewmodelproperties.IViewModelProperty;
-import com.github.terrasearch.viewmodelproperties.ViewModelProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -14,7 +11,7 @@ import static org.mockito.Mockito.verify;
 
 public class ViewModelPropertyTest {
     private final int propertyInitialValue = 0;
-    private final IViewModelProperty<Integer> property = new ViewModelProperty<>(propertyInitialValue);
+    private final IProperty<Integer> property = new Property<>(propertyInitialValue);
     @Mock
     private IPropertyChangedListener<Integer> propertyChangedListener;
 
@@ -33,8 +30,7 @@ public class ViewModelPropertyTest {
     public void propertyChangedListenerCalled() {
         property.registerPropertyChangedListener(propertyChangedListener);
         property.setValue(2);
-        verify(propertyChangedListener, times(1)).onPropertyChanged();
-        verify(propertyChangedListener, times(1)).onPropertyChanged(2);
-        verify(propertyChangedListener, times(0)).onPropertyChanged(1);
+        verify(propertyChangedListener, times(1)).onPropertyChanged(0, 2);
+        verify(propertyChangedListener, times(0)).onPropertyChanged(0, 1);
     }
 }
