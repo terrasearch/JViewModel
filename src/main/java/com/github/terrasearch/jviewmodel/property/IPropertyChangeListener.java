@@ -5,7 +5,7 @@ package com.github.terrasearch.jviewmodel.property;
  *
  * @param <T> type of the value of the property
  */
-public interface IPropertyChangedListener<T> {
+public interface IPropertyChangeListener<T> {
     /**
      * Will be called, after the property has changed.
      *

@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class ViewModelPropertyTest {
+public class PropertyTest {
     private final int propertyInitialValue = 0;
     private final IProperty<Integer> property = new Property<>(propertyInitialValue);
     @Mock
-    private IPropertyChangedListener<Integer> propertyChangedListener;
+    private IPropertyChangeListener<Integer> propertyChangedListener;
 
     @BeforeEach
     public void initProperty() {

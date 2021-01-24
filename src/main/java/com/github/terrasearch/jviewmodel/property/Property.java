@@ -5,12 +5,12 @@ import java.util.List;
 
 /**
  * A property, which announces it's changes to all subscribers. You can subscribe to change notification's through
- * {@link #registerPropertyChangedListener(IPropertyChangedListener)}
+ * {@link #registerPropertyChangedListener(IPropertyChangeListener)}
  *
  * @param <T> Type of the property, which will be stored. Using a JavaBeans is recommended.
  */
 public class Property<T> implements IProperty<T> {
-    private final List<IPropertyChangedListener<T>> propertyChangedListenerList = new ArrayList<>();
+    private final List<IPropertyChangeListener<T>> propertyChangedListenerList = new ArrayList<>();
     private T value;
 
     /**
@@ -35,7 +35,7 @@ public class Property<T> implements IProperty<T> {
     }
 
     @Override
-    public void registerPropertyChangedListener(final IPropertyChangedListener<T> propertyChangedListener) {
+    public void registerPropertyChangedListener(final IPropertyChangeListener<T> propertyChangedListener) {
         propertyChangedListenerList.add(propertyChangedListener);
     }
 }

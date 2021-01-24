@@ -3,7 +3,7 @@ package com.github.terrasearch.jviewmodel.property;
 /**
  * Describes a property which notifies it's subscribers
  *
- * @param <T> DataType of the Property, which will be propagated through {@link IPropertyChangedListener#onPropertyChanged(T, T)}
+ * @param <T> DataType of the Property, which will be propagated through {@link IPropertyChangeListener#onPropertyChanged(T, T)}
  */
 interface IProperty<T> {
     /**
@@ -12,18 +12,18 @@ interface IProperty<T> {
     T getValue();
 
     /**
-     * Will call {@link IPropertyChangedListener#onPropertyChanged(Object, Object)} of all registered
-     * {@link IPropertyChangedListener} after the value has changed, which are registered through
-     * {@link #registerPropertyChangedListener(IPropertyChangedListener)}
+     * Will call {@link IPropertyChangeListener#onPropertyChanged(Object, Object)} of all registered
+     * {@link IPropertyChangeListener} after the value has changed, which are registered through
+     * {@link #registerPropertyChangedListener(IPropertyChangeListener)}
      *
      * @param value value of the property
      */
     void setValue(T value);
 
     /**
-     * Registering a {@link IPropertyChangedListener}
+     * Registering a {@link IPropertyChangeListener}
      *
-     * @param propertyChangedListener A {@link IPropertyChangedListener}, which will be called when {@link #setValue(T)} is called
+     * @param propertyChangedListener A {@link IPropertyChangeListener}, which will be called when {@link #setValue(T)} is called
      */
-    void registerPropertyChangedListener(IPropertyChangedListener<T> propertyChangedListener);
+    void registerPropertyChangedListener(IPropertyChangeListener<T> propertyChangedListener);
 }

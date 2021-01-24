@@ -1,10 +1,12 @@
 package com.github.terrasearch.jviewmodel.examples.property;
 
+import com.github.terrasearch.jviewmodel.property.IPropertyChangeListener;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * The MainView, which demonstrates the updating mechanic via {@link com.github.terrasearch.jviewmodel.property.IPropertyChangedListener}.
+ * The MainView, which demonstrates the updating mechanic via {@link IPropertyChangeListener}.
  * Go to {@link #bindings()} to see how to use the subscription
  */
 class MainView {
@@ -22,8 +24,8 @@ class MainView {
      */
     private static void bindings() {
         viewModel.registerPropertyChangedListener((valueBefore, valueAfter) -> {
-            valueBeforeChangeText.setText(valueBefore.toString());
-            valueAfterChangeText.setText(valueAfter.toString());
+            valueBeforeChangeText.setText(String.valueOf(valueBefore));
+            valueAfterChangeText.setText(String.valueOf(valueAfter));
         });
     }
 
@@ -31,7 +33,7 @@ class MainView {
      * Initiates GUI components of the view
      */
     private static void initGUI() {
-        final JFrame mainFrame = new JFrame("Example of a implemented ViewModel Property");
+        final JFrame mainFrame = new JFrame("Example of an implemented ViewModel Property");
         final JPanel panel = new JPanel();
         final JLabel beforeChangeValueLabel = new JLabel("Value before change");
         final JLabel afterChangedValueLabel = new JLabel("Value after change");
