@@ -38,4 +38,8 @@ public class Property<T> implements IProperty<T> {
     public void registerPropertyChangedListener(final IPropertyChangeListener<T> propertyChangedListener) {
         propertyChangedListenerList.add(propertyChangedListener);
     }
+
+    public void removePropertyChangedListener(final IPropertyChangeListener<T> propertyChangedListener) {
+        propertyChangedListenerList.remove(propertyChangedListener);
+    }
 }

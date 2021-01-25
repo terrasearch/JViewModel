@@ -1,7 +1,7 @@
 package com.github.terrasearch.jviewmodel.examples.swing;
 
 import com.github.terrasearch.jviewmodel.convert.IntegerConverter;
-import com.github.terrasearch.jviewmodel.swing.BoundJTextComponent;
+import com.github.terrasearch.jviewmodel.swing.BoundJText;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +41,12 @@ public class MainView {
     }
 
     private static void bindings() {
-        new BoundJTextComponent<>(boundText, viewModel, new IntegerConverter(), false);
-        new BoundJTextComponent<>(propertyValueText, viewModel, new IntegerConverter(), true);
+        BoundJText<Integer> boundTextWrapper = new BoundJText<>(boundText);
+        boundTextWrapper.setBoundProperty(viewModel, new IntegerConverter());
+        boundTextWrapper.setReadOnly(false);
+
+        BoundJText<Integer> propertyValueTextWrapper = new BoundJText<>(propertyValueText);
+        boundTextWrapper.setBoundProperty(viewModel, new IntegerConverter());
+        boundTextWrapper.setReadOnly(true);
     }
 }
