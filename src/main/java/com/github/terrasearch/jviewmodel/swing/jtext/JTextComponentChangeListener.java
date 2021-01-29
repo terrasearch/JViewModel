@@ -14,10 +14,9 @@ import java.beans.PropertyChangeListener;
 import java.util.Objects;
 
 
-public class DocumentTextChangeListener implements DocumentListener {
+public class JTextComponentChangeListener implements DocumentListener {
     private final JTextComponent textComponent;
     private final PropertyChangeListener changeListener;
-    private int lastChange = 0, lastNotifiedChange = 0;
     private String lastText;
 
     /**
@@ -32,8 +31,8 @@ public class DocumentTextChangeListener implements DocumentListener {
      *                       will be the text component
      * @throws NullPointerException if either parameter is null
      */
-    public DocumentTextChangeListener(@NotNull final JTextComponent textComponent,
-                                      @NotNull final PropertyChangeListener changeListener) {
+    public JTextComponentChangeListener(@NotNull final JTextComponent textComponent,
+                                        @NotNull final PropertyChangeListener changeListener) {
         this.textComponent = Objects.requireNonNull(textComponent);
         this.changeListener = Objects.requireNonNull(changeListener);
         lastText = textComponent.getText();
@@ -51,18 +50,25 @@ public class DocumentTextChangeListener implements DocumentListener {
 
     @Override
     public void changedUpdate(@Nullable final DocumentEvent e) {
-        synchronized (this) {
-            lastChange++;
-            SwingUtilities.invokeLater(() -> {
-                synchronized (DocumentTextChangeListener.this) {
-                    if (lastNotifiedChange != lastChange) {
-                        lastNotifiedChange = lastChange;
-                        changeListener.propertyChange(new PropertyChangeEvent(textComponent, "text", lastText,
-                                textComponent.getText()));
-                        lastText = textComponent.getText();
-                    }
-                }
-            });
+        SwingUtilities.invokeLater(this::announceChange);
+    }
+
+    public PropertyChangeListener getChangeListener() {
+        return changeListener;
+    }
+
+    private synchronized void announceChange() {
+        if (valueHasChanged()) {
+            changeListener.propertyChange(new PropertyChangeEvent(textComponent, "text", lastText,
+                    textComponent.getText()));
+            lastText = textComponent.getText();
         }
+    }
+
+    private boolean valueHasChanged() {
+        final boolean valueStayedNull = lastText == null && textComponent.getText() == null;
+        if (valueStayedNull) return false;
+        // If last value is null, value has changed because both can't be null anymore
+        return lastText == null || !lastText.equals(textComponent.getText());
     }
 }

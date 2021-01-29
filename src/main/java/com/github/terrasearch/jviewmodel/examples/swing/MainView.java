@@ -42,11 +42,11 @@ public class MainView {
 
     private static void bindings() {
         BoundJText<Integer> boundTextWrapper = new BoundJText<>(boundText);
-        boundTextWrapper.setBoundProperty(viewModel, new IntegerConverter());
+        boundTextWrapper.setBinding(viewModel, new IntegerConverter());
         boundTextWrapper.setReadOnly(false);
 
         BoundJText<Integer> propertyValueTextWrapper = new BoundJText<>(propertyValueText);
-        boundTextWrapper.setBoundProperty(viewModel, new IntegerConverter());
-        boundTextWrapper.setReadOnly(true);
+        propertyValueTextWrapper.setBinding(viewModel, new IntegerConverter());
+        propertyValueTextWrapper.setReadOnly(true);
     }
 }
