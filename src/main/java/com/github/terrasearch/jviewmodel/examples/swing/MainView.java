@@ -1,7 +1,7 @@
 package com.github.terrasearch.jviewmodel.examples.swing;
 
 import com.github.terrasearch.jviewmodel.convert.IntegerConverter;
-import com.github.terrasearch.jviewmodel.swing.BoundJText;
+import com.github.terrasearch.jviewmodel.swing.jtext.BoundJText;
 
 import javax.swing.*;
 import java.awt.*;

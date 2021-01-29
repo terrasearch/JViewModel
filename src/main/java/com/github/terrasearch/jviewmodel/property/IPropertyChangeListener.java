@@ -1,5 +1,7 @@
 package com.github.terrasearch.jviewmodel.property;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * A listener, which listens to changes to a {@link Property}
  *
@@ -12,5 +14,5 @@ public interface IPropertyChangeListener<T> {
      * @param valueBefore value before the change
      * @param valueAfter  value after the change
      */
-    void onPropertyChanged(T valueBefore, T valueAfter);
+    void onPropertyChanged(@Nullable T valueBefore, @Nullable T valueAfter);
 }

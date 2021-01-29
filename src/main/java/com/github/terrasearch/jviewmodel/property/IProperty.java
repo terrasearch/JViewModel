@@ -1,5 +1,8 @@
 package com.github.terrasearch.jviewmodel.property;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /**
  * Describes a property which notifies it's subscribers
  *
@@ -18,12 +21,12 @@ interface IProperty<T> {
      *
      * @param value value of the property
      */
-    void setValue(T value);
+    void setValue(@Nullable T value);
 
     /**
      * Registering a {@link IPropertyChangeListener}
      *
      * @param propertyChangedListener A {@link IPropertyChangeListener}, which will be called when {@link #setValue(T)} is called
      */
-    void registerPropertyChangedListener(IPropertyChangeListener<T> propertyChangedListener);
+    void registerPropertyChangedListener(@NotNull IPropertyChangeListener<T> propertyChangedListener);
 }

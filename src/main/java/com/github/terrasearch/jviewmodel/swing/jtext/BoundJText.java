@@ -1,8 +1,9 @@
-package com.github.terrasearch.jviewmodel.swing;
+package com.github.terrasearch.jviewmodel.swing.jtext;
 
 import com.github.terrasearch.jviewmodel.convert.IValueConverter;
 import com.github.terrasearch.jviewmodel.property.IPropertyChangeListener;
 import com.github.terrasearch.jviewmodel.property.Property;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -11,7 +12,7 @@ import java.text.ParseException;
 import java.util.Objects;
 
 public class BoundJText<T> {
-    private final JTextSimpleChangeListenerWrapper textComponent;
+    private final JTextChangeListenerWrapper textComponent;
     private IValueConverter<T> valueConverter;
     private Property<T> boundProperty;
     private boolean readonly = true;
@@ -21,15 +22,16 @@ public class BoundJText<T> {
     private int lastChange = 0, lastNotifiedChange = 0;
 
     public BoundJText(final JTextComponent textComponent) {
-        this.textComponent = new JTextSimpleChangeListenerWrapper(Objects.requireNonNull(textComponent));
+        this.textComponent = new JTextChangeListenerWrapper(Objects.requireNonNull(textComponent));
     }
 
-    public void setBoundProperty(final Property<T> boundProperty, final IValueConverter<T> valueConverter) {
+    public void setBoundProperty(@NotNull final Property<T> boundProperty,
+                                 @NotNull final IValueConverter<T> valueConverter) {
         Objects.requireNonNull(boundProperty);
         this.valueConverter = Objects.requireNonNull(valueConverter);
 
-        if (this.boundPropertyChangedListener != null) {
-            boundProperty.removePropertyChangedListener(boundPropertyChangedListener);
+        if (boundPropertyChangedListener != null) {
+            this.boundProperty.removePropertyChangedListener(boundPropertyChangedListener);
         }
 
         this.boundProperty = boundProperty;
@@ -42,7 +44,7 @@ public class BoundJText<T> {
         registerTextComponentChangeListener();
     }
 
-    public void setReadOnly(boolean readOnly) {
+    public void setReadOnly(final boolean readOnly) {
         this.readonly = readOnly;
     }
 
