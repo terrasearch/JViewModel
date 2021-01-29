@@ -14,7 +14,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Objects;
 
 
-public class JTextComponentChangeListener implements DocumentListener {
+class JTextComponentChangeListener implements DocumentListener {
     private final JTextComponent textComponent;
     private final PropertyChangeListener changeListener;
     private String lastText;
