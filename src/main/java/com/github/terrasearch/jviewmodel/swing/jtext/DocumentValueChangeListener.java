@@ -1,38 +1,31 @@
 package com.github.terrasearch.jviewmodel.swing.jtext;
 
+import com.github.terrasearch.jviewmodel.property.IPropertyChangeListener;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Objects;
 
 
-class JTextComponentChangeListener implements DocumentListener {
+class DocumentValueChangeListener implements DocumentListener {
     private final JTextComponent textComponent;
-    private final PropertyChangeListener changeListener;
+    private final IPropertyChangeListener<String> changeListener;
     private String lastText;
 
     /**
      * Installs a listener to receive notification when the text of any
-     * {@code JTextComponent} is changed. Internally, it installs a
-     * {@link DocumentListener} on the text component's {@link Document},
-     * and a {@link PropertyChangeListener} on the text component to detect
-     * if the {@code Document} itself is replaced.
+     * {@link JTextComponent} is changed. Internally, it installs a
+     * {@link IPropertyChangeListener} on the text component's {@link Document}
      *
-     * @param changeListener a listener to receive {@link ChangeEvent}s
-     *                       when the text is changed; the source object for the events
-     *                       will be the text component
-     * @throws NullPointerException if either parameter is null
+     * @param textComponent  the {@link JTextComponent} which is listened to
+     * @param changeListener a {@link IPropertyChangeListener} to receive change notifications
      */
-    public JTextComponentChangeListener(@NotNull final JTextComponent textComponent,
-                                        @NotNull final PropertyChangeListener changeListener) {
+    public DocumentValueChangeListener(@NotNull final JTextComponent textComponent, @NotNull final IPropertyChangeListener<String> changeListener) {
         this.textComponent = Objects.requireNonNull(textComponent);
         this.changeListener = Objects.requireNonNull(changeListener);
         lastText = textComponent.getText();
@@ -53,14 +46,13 @@ class JTextComponentChangeListener implements DocumentListener {
         SwingUtilities.invokeLater(this::announceChange);
     }
 
-    public PropertyChangeListener getChangeListener() {
+    public IPropertyChangeListener<String> getChangeListener() {
         return changeListener;
     }
 
     private synchronized void announceChange() {
         if (valueHasChanged()) {
-            changeListener.propertyChange(new PropertyChangeEvent(textComponent, "text", lastText,
-                    textComponent.getText()));
+            changeListener.onPropertyChanged(lastText, textComponent.getText());
             lastText = textComponent.getText();
         }
     }
