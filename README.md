@@ -1,4 +1,4 @@
-# JViewModel [![codecov](https://codecov.io/gh/terrasearch/JViewModel/branch/master/graph/badge.svg?token=5Y5DPBIOES)](https://codecov.io/gh/terrasearch/JViewModel)
+# JViewModel [![codecov](https://codecov.io/gh/terrasearch/JViewModel/branch/master/graph/badge.svg?token=5Y5DPBIOES)](https://codecov.io/gh/terrasearch/JViewModel) ![Java CI with Gradle](https://github.com/terrasearch/JViewModel/workflows/Java%20CI%20with%20Gradle/badge.svg)
 is a library, inspired by C# WPFs ViewModel patterns. It reduces the boilerplate needed to implement [Model/View/ViewModel (MVVM)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) in Java, with Java Swing. It simplifies already existing elements, which helps with Swing MVVM infrastructure, at the cost of functionality (for now).
 
 ##  Property
