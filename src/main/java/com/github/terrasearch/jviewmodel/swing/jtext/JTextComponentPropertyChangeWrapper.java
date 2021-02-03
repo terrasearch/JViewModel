@@ -14,18 +14,18 @@ import java.util.Objects;
  * Use {@link #addChangeListener(IPropertyChangeListener)} to add a change listener
  * Use {@link #removeChangeListener(IPropertyChangeListener)} to remove a change listener
  */
-class TextChangeJTextComponentWrapper {
+class JTextComponentPropertyChangeWrapper {
     private static final String documentPropertyName = "document";
     private final JTextComponent textComponent;
-    private final List<DocumentValueChangeListener> textChangeListeners = new ArrayList<>();
+    private final List<DocumentValueChangeBridge> textChangeListeners = new ArrayList<>();
 
-    public TextChangeJTextComponentWrapper(final JTextComponent textComponent) {
+    public JTextComponentPropertyChangeWrapper(final JTextComponent textComponent) {
         this.textComponent = textComponent;
         textComponent.addPropertyChangeListener(documentPropertyName, this::documentChanged);
     }
 
     public void addChangeListener(final IPropertyChangeListener<String> changeListener) {
-        final DocumentValueChangeListener textChangeListener = new DocumentValueChangeListener(textComponent, Objects.requireNonNull(changeListener));
+        final DocumentValueChangeBridge textChangeListener = new DocumentValueChangeBridge(textComponent, Objects.requireNonNull(changeListener));
         textChangeListeners.add(textChangeListener);
 
         final Document document = textComponent.getDocument();

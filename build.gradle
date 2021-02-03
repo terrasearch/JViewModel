@@ -23,7 +23,7 @@ dependencies {
     String dependencyJupiterVersion = '5.7.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: dependencyJupiterVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: dependencyJupiterVersion
-    testCompile group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.7.7'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.7.7'
     compileOnly group: 'org.jetbrains', name: 'annotations', version: '20.1.0'
 }
 

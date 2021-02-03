@@ -9,10 +9,13 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
-
-class DocumentValueChangeListener implements DocumentListener {
+/**
+ * A bridge from {@link DocumentListener} to {@link IPropertyChangeListener}.
+ */
+class DocumentValueChangeBridge implements DocumentListener {
     private final JTextComponent textComponent;
     private final IPropertyChangeListener<String> changeListener;
     private String lastText;
@@ -25,7 +28,7 @@ class DocumentValueChangeListener implements DocumentListener {
      * @param textComponent  the {@link JTextComponent} which is listened to
      * @param changeListener a {@link IPropertyChangeListener} to receive change notifications
      */
-    public DocumentValueChangeListener(@NotNull final JTextComponent textComponent, @NotNull final IPropertyChangeListener<String> changeListener) {
+    public DocumentValueChangeBridge(@NotNull final JTextComponent textComponent, @NotNull final IPropertyChangeListener<String> changeListener) {
         this.textComponent = Objects.requireNonNull(textComponent);
         this.changeListener = Objects.requireNonNull(changeListener);
         lastText = textComponent.getText();
@@ -43,7 +46,11 @@ class DocumentValueChangeListener implements DocumentListener {
 
     @Override
     public void changedUpdate(@Nullable final DocumentEvent e) {
-        SwingUtilities.invokeLater(this::announceChange);
+        try {
+            SwingUtilities.invokeAndWait(this::announceChange);
+        } catch (InterruptedException | InvocationTargetException interruptedException) {
+            // TODO: Log
+        }
     }
 
     public IPropertyChangeListener<String> getChangeListener() {

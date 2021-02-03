@@ -19,7 +19,7 @@ import java.util.Objects;
  * @param <T> type of bound property
  */
 public class JTextComponentBinding<T> {
-    private final TextChangeJTextComponentWrapper listenableTextComponent;
+    private final JTextComponentPropertyChangeWrapper listenableTextComponent;
 
     private IValueConverter<T> valueConverter;
     private Property<T> boundProperty;
@@ -31,7 +31,7 @@ public class JTextComponentBinding<T> {
     private IPropertyChangeListener<String> textChangedListener;
 
     public JTextComponentBinding(final JTextComponent textComponent) {
-        this.listenableTextComponent = new TextChangeJTextComponentWrapper(Objects.requireNonNull(textComponent));
+        this.listenableTextComponent = new JTextComponentPropertyChangeWrapper(Objects.requireNonNull(textComponent));
     }
 
     /**
