@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DoubleValueConverterTest {
+class DoubleValueConverterTest {
     @Test
     public void convertTest() {
         final Double doubleValue = 1.0;

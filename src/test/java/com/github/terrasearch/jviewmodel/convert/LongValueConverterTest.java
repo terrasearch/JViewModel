@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LongValueConverterTest {
+class LongValueConverterTest {
     @Test
     public void convertTest() {
         final Long doubleValue = 1L;

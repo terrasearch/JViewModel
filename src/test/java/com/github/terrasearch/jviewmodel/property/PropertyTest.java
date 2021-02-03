@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class PropertyTest {
+class PropertyTest {
     private final int propertyInitialValue = 0;
     private final IProperty<Integer> property = new Property<>(propertyInitialValue);
     @Mock

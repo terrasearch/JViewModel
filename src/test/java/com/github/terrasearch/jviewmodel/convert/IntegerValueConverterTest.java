@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class IntegerValueConverterTest {
+class IntegerValueConverterTest {
     @Test
     public void convertTest() {
         final Integer integerValue = 1;
