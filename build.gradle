@@ -25,6 +25,8 @@ dependencies {
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: dependencyJupiterVersion
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.7.7'
     compileOnly group: 'org.jetbrains', name: 'annotations', version: '20.1.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
 }
 
 jar {

@@ -19,6 +19,7 @@ import java.util.Objects;
  * @param <T> type of bound property
  */
 public class JTextComponentBinding<T> {
+    private static final Object lock = new Object();
     private final JTextComponentPropertyChangeWrapper listenableTextComponent;
 
     private IValueConverter<T> valueConverter;
@@ -51,7 +52,8 @@ public class JTextComponentBinding<T> {
 
     /**
      * Binds Property to JText. Removes any existing binding of this Binding beforehand. Sets text to initial value.
-     * @param property which will be bound
+     *
+     * @param property       which will be bound
      * @param valueConverter how to convert a {@link String} to {@link T}
      */
     public void bind(@NotNull final Property<T> property, @NotNull final IValueConverter<T> valueConverter) {
@@ -105,22 +107,15 @@ public class JTextComponentBinding<T> {
 
     private void textChanged(@Nullable final String valueBefore, @Nullable final String valueAfter) {
         if (!readonly) {
-            SwingUtilities.invokeLater(() -> {
-                synchronized (listenableTextComponent) {
-                    removePropertyChangeListener();
-                    try {
-                        final T value = valueConverter.convertToValue(listenableTextComponent.getTextComponent().getText());
-                        boundProperty.setValue(value);
-                        onSuccess();
-                    } catch (final IllegalArgumentException iae) {
-                        removeTextComponentChangeListener();
-                        listenableTextComponent.getTextComponent().setText(valueBefore);
-                        setTextComponentChangeListener();
-                        onError(iae);
-                    }
-                    setPropertyChangeListener();
-                }
-            });
+            try {
+                final T value = valueConverter.convertToValue(listenableTextComponent.getTextComponent().getText());
+                removePropertyChangeListener();
+                boundProperty.setValue(value);
+                setPropertyChangeListener();
+                onSuccess();
+            } catch (final IllegalArgumentException iae) {
+                onError(iae);
+            }
         }
     }
 
@@ -141,10 +136,8 @@ public class JTextComponentBinding<T> {
     }
 
     private void valueChanged(@Nullable final T valueBefore, @Nullable final T valueAfter) {
-        synchronized (listenableTextComponent) {
-            removeTextComponentChangeListener();
-            listenableTextComponent.getTextComponent().setText(String.valueOf(valueAfter));
-            setTextComponentChangeListener();
-        }
+        removeTextComponentChangeListener();
+        listenableTextComponent.getTextComponent().setText(String.valueOf(valueAfter));
+        setTextComponentChangeListener();
     }
 }

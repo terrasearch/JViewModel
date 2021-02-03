@@ -1,21 +1,22 @@
 package com.github.terrasearch.jviewmodel.swing.jtext;
 
 import com.github.terrasearch.jviewmodel.property.IPropertyChangeListener;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 
 /**
  * A bridge from {@link DocumentListener} to {@link IPropertyChangeListener}.
  */
 class DocumentValueChangeBridge implements DocumentListener {
+    private static final Logger logger = LogManager.getLogger(JTextComponentBinding.class);
     private final JTextComponent textComponent;
     private final IPropertyChangeListener<String> changeListener;
     private String lastText;
@@ -46,11 +47,7 @@ class DocumentValueChangeBridge implements DocumentListener {
 
     @Override
     public void changedUpdate(@Nullable final DocumentEvent e) {
-        try {
-            SwingUtilities.invokeAndWait(this::announceChange);
-        } catch (InterruptedException | InvocationTargetException interruptedException) {
-            // TODO: Log
-        }
+        announceChange();
     }
 
     public IPropertyChangeListener<String> getChangeListener() {
