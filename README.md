@@ -19,6 +19,15 @@ Logs the changes of given ViewModel. Also has an implementation of [Log4j](https
 # Tasklist
 - [x] Property
 - [ ] Java Swing MVVM
+  - [x] Textfields
+  - [ ] Buttons
+  - [ ] CheckBox
+  - [ ] ComboBox
+  - [ ] List
+  - [ ] Spinner
+  - [ ] RadioButton
+  - [ ] Slider
+  - [ ] ProgressBar
 - [ ] RevertableProperty
 - [ ] ViewModelLocator and DependencyInjector
 - [ ] ViewModel Logger
