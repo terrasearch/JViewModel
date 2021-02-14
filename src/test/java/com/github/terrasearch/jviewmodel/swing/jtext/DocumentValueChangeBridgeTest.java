@@ -34,6 +34,15 @@ class DocumentValueChangeBridgeTest {
     }
 
     @Test
+    void removeUpdate() {
+        textField.setText("test");
+        final DocumentValueChangeBridge bridge = new DocumentValueChangeBridge(textField, propertyChangedListener);
+        textField.setText("");
+        bridge.removeUpdate(documentEvent);
+        verify(propertyChangedListener, times(1)).onPropertyChanged("test", "");
+    }
+
+    @Test
     void getChangeListener() {
         final DocumentValueChangeBridge bridge = new DocumentValueChangeBridge(textField, propertyChangedListener);
         assertEquals(bridge.getChangeListener(), propertyChangedListener);

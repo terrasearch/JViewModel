@@ -2,28 +2,23 @@ package com.github.terrasearch.jviewmodel.convert;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class LongValueConverterTest {
+    private final ConverterTest<Long> converterTest = new ConverterTest<>(new LongValueConverter());
     @Test
     public void convertTest() {
-        final Long doubleValue = 1L;
-        final String stringValue = "1";
-        final Long convertedDouble = new LongValueConverter().convertToValue(stringValue);
-        assertEquals(doubleValue, convertedDouble);
+        final Long expectedValue = 1L;
+        converterTest.convert(expectedValue);
     }
 
     @Test
     public void convertNull() {
-        final Long doubleValue = 0L;
-        final Long convertedDouble = new LongValueConverter().convertToValue(null);
-        assertEquals(doubleValue, convertedDouble);
+        final Long expectedValue = 0L;
+        converterTest.convertNull(expectedValue);
     }
 
     @Test
     public void convertEmptyString() {
-        final Long doubleValue = 0L;
-        final Long convertedDouble = new LongValueConverter().convertToValue("");
-        assertEquals(doubleValue, convertedDouble);
+        final Long expectedValue = 0L;
+        converterTest.convertEmptyString(expectedValue);
     }
 }

@@ -2,28 +2,24 @@ package com.github.terrasearch.jviewmodel.convert;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class FloatValueConverterTest {
+    private final ConverterTest<Float> converterTest = new ConverterTest<>(new FloatValueConverter());
+
     @Test
-    public void convertTest() {
-        final Float floatValue = 1.0f;
-        final String stringValue = "1.0";
-        final Float convertedFloat = new FloatValueConverter().convertToValue(stringValue);
-        assertEquals(floatValue, convertedFloat);
+    public void convert() {
+        final Float expectedValue = 1.23f;
+        converterTest.convert(expectedValue);
     }
 
     @Test
     public void convertNull() {
-        final Float floatValue = 0.0f;
-        final Float convertedFloat = new FloatValueConverter().convertToValue(null);
-        assertEquals(floatValue, convertedFloat);
+        final Float expectedValue = 0.0f;
+        converterTest.convertNull(expectedValue);
     }
 
     @Test
     public void convertEmptyString() {
-        final Float floatValue = 0.0f;
-        final Float convertedFloat = new FloatValueConverter().convertToValue("");
-        assertEquals(floatValue, convertedFloat);
+        final Float expectedValue = 0.0f;
+        converterTest.convertEmptyString(expectedValue);
     }
 }

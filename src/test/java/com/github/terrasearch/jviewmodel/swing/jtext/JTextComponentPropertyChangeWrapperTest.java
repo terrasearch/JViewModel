@@ -44,4 +44,14 @@ class JTextComponentPropertyChangeWrapperTest {
         final JTextComponentPropertyChangeWrapper wrapper = new JTextComponentPropertyChangeWrapper(textField);
         assertEquals(wrapper.getTextComponent(), textField);
     }
+
+    @Test
+    void documentChanged() {
+        JTextComponentPropertyChangeWrapper wrapper = new JTextComponentPropertyChangeWrapper(new JTextField(""));
+        wrapper.addChangeListener(propertyChangedListener);
+        wrapper.getTextComponent().setDocument(new JTextField("").getDocument());
+        wrapper.getTextComponent().setText("test");
+        verify(propertyChangedListener, times(1)).onPropertyChanged("", "test");
+
+    }
 }
