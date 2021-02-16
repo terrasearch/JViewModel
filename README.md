@@ -28,6 +28,7 @@ Logs the changes of given ViewModel. Also has an implementation of [Log4j](https
   - [ ] RadioButton
   - [ ] Slider
   - [ ] ProgressBar
+- [ ] Data Abstracted List
 - [ ] RevertableProperty
 - [ ] ViewModelLocator and DependencyInjector
 - [ ] ViewModel Logger
